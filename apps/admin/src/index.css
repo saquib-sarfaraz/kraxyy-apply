@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #F4EFE4;
+  --color-olive: #525B31;
+  --color-mustard: #B18B40;
+  --color-beige: #D6CAAC;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-cream);
+  color: #1E2315;
+}

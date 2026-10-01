@@ -1,0 +1,30 @@
+{
+  "name": "kraxyy-apply-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kraxyy Apply - Production-ready job application automation platform",
+  "workspaces": [
+    "packages/*",
+    "services/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npx concurrently \"npm run dev:api\" \"npm run dev:web\" \"npm run dev:admin\"",
+    "dev:api": "npm --workspace=@kraxyy/api run dev",
+    "dev:web": "npm --workspace=@kraxyy/web run dev",
+    "dev:admin": "npm --workspace=@kraxyy/admin run dev",
+    "dev:extension": "npm --workspace=@kraxyy/extension run dev",
+    "build": "npm run build:packages && npm run build:services && npm run build:apps",
+    "build:packages": "npm --workspace=@kraxyy/types run build && npm --workspace=@kraxyy/shared run build && npm --workspace=@kraxyy/validation run build",
+    "build:services": "npm --workspace=@kraxyy/job-ingestion run build && npm --workspace=@kraxyy/matching run build && npm --workspace=@kraxyy/d1-worker run build && npm --workspace=@kraxyy/api run build",
+    "build:apps": "npm --workspace=@kraxyy/web run build && npm --workspace=@kraxyy/admin run build && npm --workspace=@kraxyy/extension run build",
+    "test": "npm --workspace=@kraxyy/api run test && npm --workspace=@kraxyy/extension run test && npm --workspace=@kraxyy/job-ingestion run test && npm --workspace=@kraxyy/matching run test && npm --workspace=@kraxyy/d1-worker run test",
+    "typecheck": "tsc -b --noEmit",
+    "seed": "npm --workspace=@kraxyy/api run seed",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "typescript": "^5.6.3"
+  }
+}
