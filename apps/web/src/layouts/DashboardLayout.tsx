@@ -68,6 +68,24 @@ export const DashboardLayout: React.FC = () => {
               </NavLink>
             );
           })}
+
+          {user?.email?.toLowerCase().trim() === 'saquibsarfaraz47@gmail.com' && (
+            <div className="pt-3 mt-3 border-t border-beige/80">
+              <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3.5 py-2 rounded-subtle text-xs font-semibold transition ${
+                    isActive
+                      ? 'bg-olive text-white shadow-soft font-bold'
+                      : 'text-olive hover:bg-beige-100'
+                  }`
+                }
+              >
+                <ShieldCheck className="w-4 h-4 text-mustard" />
+                <span>Admin Console</span>
+              </NavLink>
+            </div>
+          )}
         </nav>
 
         {/* Extension Quick Promo */}
@@ -210,16 +228,14 @@ export const DashboardLayout: React.FC = () => {
             </nav>
 
             {user?.email?.toLowerCase() === 'saquibsarfaraz47@gmail.com' && (
-              <a
-                href="http://localhost:5174"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/admin"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-subtle text-sm font-semibold bg-olive/10 text-olive hover:bg-olive/20 transition mb-3"
               >
                 <ShieldCheck className="w-4 h-4 text-mustard" />
                 <span>Admin Console</span>
-              </a>
+              </Link>
             )}
 
             <button

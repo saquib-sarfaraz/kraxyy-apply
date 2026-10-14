@@ -21,6 +21,14 @@ import { SavedJobsPage } from './pages/jobs/SavedJobsPage';
 import { ExtensionCompanionPage } from './pages/extension/ExtensionCompanionPage';
 import { SettingsPage } from './pages/settings/SettingsPage';
 
+// Admin Pages & Components
+import { AdminLayout } from './layouts/AdminLayout';
+import { ProtectedAdminRoute } from './components/admin/ProtectedAdminRoute';
+import { AdminLoginPage } from './pages/admin/AdminLoginPage';
+import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+import { AdminUsersPage } from './pages/admin/AdminUsersPage';
+import { AdminContactRequestsPage } from './pages/admin/AdminContactRequestsPage';
+
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isLoading } = useAuth();
 
@@ -86,6 +94,21 @@ export const App: React.FC = () => {
             <Route path="/applications" element={<ApplicationsPage />} />
             <Route path="/extension" element={<ExtensionCompanionPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+          </Route>
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoute>
+                <AdminLayout />
+              </ProtectedAdminRoute>
+            }
+          >
+            <Route index element={<AdminDashboardPage />} />
+            <Route path="users" element={<AdminUsersPage />} />
+            <Route path="contact-requests" element={<AdminContactRequestsPage />} />
           </Route>
 
           {/* Fallback */}

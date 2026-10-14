@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build:packages && npm --workspace=@kraxyy/web run build",
+  "outputDirectory": "apps/web/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

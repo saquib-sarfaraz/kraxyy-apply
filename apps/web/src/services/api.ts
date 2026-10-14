@@ -8,20 +8,22 @@ class ApiClient {
   private refreshSubscribers: Array<(token: string) => void> = [];
 
   constructor() {
-    this.accessToken = localStorage.getItem('kraxyy_access_token');
+    this.accessToken = localStorage.getItem('kraxyy_access_token') || localStorage.getItem('kraxyy_admin_token');
   }
 
   setToken(token: string | null) {
     this.accessToken = token;
     if (token) {
       localStorage.setItem('kraxyy_access_token', token);
+      localStorage.setItem('kraxyy_admin_token', token);
     } else {
       localStorage.removeItem('kraxyy_access_token');
+      localStorage.removeItem('kraxyy_admin_token');
     }
   }
 
   getToken(): string | null {
-    return this.accessToken;
+    return this.accessToken || localStorage.getItem('kraxyy_access_token') || localStorage.getItem('kraxyy_admin_token');
   }
 
   private onTokenRefreshed(token: string) {
